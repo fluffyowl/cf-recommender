@@ -1,10 +1,5 @@
 const API_PREFIX = "http://codeforces.com/api/"
 
-function buttonOnClick() {
-    handle = document.handle_form.cf_handle.text;
-    document.location.href = document.location + "?" + handle
-}
-
 function parseIdFromUrlParameters() {
     return (new URL(document.location)).searchParams.get("cf_handle");
 }
@@ -21,8 +16,6 @@ async function getRating(handle) {
     const user = await json.result[0]; // 最初のユーザを取り出す
     return user.rating;
 }
-
-async function
 
 window.onload = async function displayContentForId() {
     const handle = parseIdFromUrlParameters();
