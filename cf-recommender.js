@@ -1,4 +1,4 @@
-const API_PREFIX = "http://codeforces.com/api/"
+const API_PREFIX = "https://codeforces.com/api/"
 
 function parseIdFromUrlParameters() {
     return (new URL(document.location)).searchParams.get("cf_handle");
