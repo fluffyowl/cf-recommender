@@ -17,12 +17,32 @@ async function getRating(handle) {
     return user.rating;
 }
 
+async function getAcceptedProblems(handle) {
+    const apiUrl = API_PREFIX + "user.status?handle=" + handle;
+    const json = await getJson(apiUrl);
+    const submissions = await json.result;
+    return submissions.filter(submission => {
+        return submission.verdict === "OK";
+    }).map(submission => {
+        return submission.problem;
+    });
+}
+
+async function getProblems() {
+    const apiUrl = API_PREFIX + "problemset.problems";
+    const json = await getJson(apiUrl);
+    const problems = await json.result.problems;
+    return problems;
+}
+
 window.onload = async function displayContentForId() {
     const handle = parseIdFromUrlParameters();
     if (handle == null) return;
 
     target = document.getElementById("error_text");
     rating = await getRating(handle);
+    acceptedProblems = await getAcceptedProblems(handle);
+    problems = await getProblems();
 
     target.innerHTML = rating;
 }
