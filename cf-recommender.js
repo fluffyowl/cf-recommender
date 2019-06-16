@@ -100,6 +100,7 @@ function roundRating(rating) {
 window.onload = async function displayContentForId() {
     const handle = parseIdFromUrlParameters();
     if (handle == null) return;
+    document.getElementById("cf_handle").value = handle;
 
     var target = document.getElementById("dynamic_text");
     var rating = await getRating(handle);
@@ -121,7 +122,7 @@ window.onload = async function displayContentForId() {
         var problem = choiceProblemByDifficulty(i, problems, acceptedProblemsDict);
         if (problem === null) continue;
         var url = generateProblemUrl(problem);
-        newInnerHTML += i.toString() + " <a href=\"" + url + "\" target=\"_blank\">" + problem.contestId + problem.index + ": " + problem.name + "</a><br />";
+        newInnerHTML += i.toString() + " / <a href=\"" + url + "\" target=\"_blank\">" + problem.contestId + problem.index + ": " + problem.name + "</a><br />";
     }
 
     target.innerHTML = newInnerHTML;
